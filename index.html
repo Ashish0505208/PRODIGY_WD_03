@@ -7,15 +7,12 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-    <!-- Welcome Screen -->
     <div id="welcome-screen" class="center-container">
         <h1>Tic-Tac-Toe</h1>
         <button onclick="startGame(false)">Play with Friend</button>
         <button onclick="showDifficultySelection()">Play with Computer</button>
     </div>
-
-    <!-- Difficulty Selection -->
+    
     <div id="difficulty-screen" class="hidden center-container">
         <h1>Select Difficulty</h1>
         <button onclick="startGame(true, 'easy')">Easy</button>
@@ -24,7 +21,6 @@
         <button class="back" onclick="goBack()">⬅ Back</button>
     </div>
 
-    <!-- Game Screen -->
     <div id="game-screen" class="hidden center-container">
         <h1>Tic-Tac-Toe</h1>
         <div class="board">

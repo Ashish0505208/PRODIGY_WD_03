@@ -10,14 +10,12 @@ const winningCombinations = [
     [0, 4, 8], [2, 4, 6]
 ];
 
-// Show difficulty selection for AI mode
 function showDifficultySelection() {
     resetGame();
     document.getElementById("welcome-screen").classList.add("hidden");
     document.getElementById("difficulty-screen").classList.remove("hidden");
 }
 
-// Start the game (Friend or AI mode)
 function startGame(vsComputer, level = "easy") {
     resetGame();
     isComputer = vsComputer;
@@ -28,18 +26,15 @@ function startGame(vsComputer, level = "easy") {
     document.getElementById("difficulty-screen").classList.add("hidden");
     document.getElementById("game-screen").classList.remove("hidden");
 
-    // If AI starts, make the first move
     if (isComputer && currentPlayer === "O") {
         setTimeout(computerMove, 500);
     }
 }
 
-// Go back to the main menu and reset the board
 function goBack() {
     resetGame();
     
     if (!document.getElementById("game-screen").classList.contains("hidden")) {
-        // If the game screen is active, return to difficulty selection or main menu
         if (isComputer) {
             document.getElementById("difficulty-screen").classList.remove("hidden");
         } else {
@@ -47,14 +42,12 @@ function goBack() {
         }
         document.getElementById("game-screen").classList.add("hidden");
     } else if (!document.getElementById("difficulty-screen").classList.contains("hidden")) {
-        // If currently in the difficulty selection, go back to the main menu
         document.getElementById("difficulty-screen").classList.add("hidden");
         document.getElementById("welcome-screen").classList.remove("hidden");
     }
 }
 
 
-// Handle user moves
 function makeMove(index) {
     if (board[index] === "" && gameActive) {
         board[index] = currentPlayer;
@@ -64,7 +57,6 @@ function makeMove(index) {
         if (gameActive) {
             currentPlayer = currentPlayer === "X" ? "O" : "X";
 
-            // If playing against AI and it's AI's turn
             if (isComputer && currentPlayer === "O") {
                 setTimeout(computerMove, 500);
             }
@@ -72,7 +64,6 @@ function makeMove(index) {
     }
 }
 
-// Computer move logic
 function computerMove() {
     if (!gameActive) return;
 
@@ -80,30 +71,28 @@ function computerMove() {
     let availableMoves = board.map((val, idx) => (val === "" ? idx : null)).filter(v => v !== null);
 
     if (difficulty === "easy") {
-        move = availableMoves[Math.floor(Math.random() * availableMoves.length)]; // Random move
+        move = availableMoves[Math.floor(Math.random() * availableMoves.length)];
     } else if (difficulty === "medium") {
         move = bestMoveForMedium() || availableMoves[Math.floor(Math.random() * availableMoves.length)];
     } else {
-        move = bestMove(); // Minimax for hard difficulty
+        move = bestMove();
     }
 
     makeMove(move);
 }
 
-// Medium AI: Blocks user wins but doesn't play optimally
 function bestMoveForMedium() {
     for (let combo of winningCombinations) {
         let [a, b, c] = combo;
         let values = [board[a], board[b], board[c]];
 
         if (values.filter(v => v === "X").length === 2 && values.includes("")) {
-            return combo[values.indexOf("")]; // Block user
+            return combo[values.indexOf("")];
         }
     }
     return null;
 }
 
-// Hard AI: Minimax algorithm
 function bestMove() {
     let bestScore = -Infinity;
     let move;
@@ -152,7 +141,6 @@ function minimax(board, depth, isMaximizing) {
     }
 }
 
-// Check winner for AI calculations
 function checkWinnerForAI() {
     for (let combo of winningCombinations) {
         let [a, b, c] = combo;
@@ -163,7 +151,6 @@ function checkWinnerForAI() {
     return board.includes("") ? null : "draw";
 }
 
-// Check for a winner and update UI
 function checkWinner() {
     for (let combo of winningCombinations) {
         let [a, b, c] = combo;
@@ -179,7 +166,6 @@ function checkWinner() {
     }
 }
 
-// Reset the board
 function resetGame() {
     board = ["", "", "", "", "", "", "", "", ""];
     currentPlayer = "X";
