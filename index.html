@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Welcome Screen -->
+    <div id="welcome-screen" class="center-container">
+        <h1>Tic-Tac-Toe</h1>
+        <button onclick="startGame(false)">Play with Friend</button>
+        <button onclick="showDifficultySelection()">Play with Computer</button>
+    </div>
+
+    <!-- Difficulty Selection -->
+    <div id="difficulty-screen" class="hidden center-container">
+        <h1>Select Difficulty</h1>
+        <button onclick="startGame(true, 'easy')">Easy</button>
+        <button onclick="startGame(true, 'medium')">Medium</button>
+        <button onclick="startGame(true, 'hard')">Hard</button>
+        <button class="back" onclick="goBack()">⬅ Back</button>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="hidden center-container">
+        <h1>Tic-Tac-Toe</h1>
+        <div class="board">
+            <div class="cell" onclick="makeMove(0)"></div>
+            <div class="cell" onclick="makeMove(1)"></div>
+            <div class="cell" onclick="makeMove(2)"></div>
+            <div class="cell" onclick="makeMove(3)"></div>
+            <div class="cell" onclick="makeMove(4)"></div>
+            <div class="cell" onclick="makeMove(5)"></div>
+            <div class="cell" onclick="makeMove(6)"></div>
+            <div class="cell" onclick="makeMove(7)"></div>
+            <div class="cell" onclick="makeMove(8)"></div>
+        </div>
+        <h2 id="status"></h2>
+        <button onclick="resetGame()">Restart</button>
+        <button class="back" onclick="goBack()">⬅ Back</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
